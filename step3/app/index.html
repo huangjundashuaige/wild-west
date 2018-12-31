@@ -1,0 +1,155 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>wild west game</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="js/index.js"></script>
+  </head>
+
+  <body>
+    <div id="page-header" class="row">
+      <div class="col-sm-12">
+          <h1 class="text-center" >Wild West</h1>
+      </div><!--./col-sm-12-->
+  </div><!--./row-->
+  
+
+
+  <div class="battel-field">
+    <img class="left-img" src="./assets/cowboy2.PNG">
+    <img class="right-img" src="./assets/cowboy1.PNG">
+</div>
+
+
+
+  <div class="container">
+    <!-- login section -->
+    <div class="card" id="loginSection">
+        <!-- Log in button -->
+        <div class="row">
+          <div class="col-sm-12">
+            <h2 class="orange">Log in</h2>
+          </div>
+        </div>
+        <div class="row">
+          <form id="log-in" class="col-sm-12">
+            <div class="form-group">
+              <label for="task-content">Account</label>
+              <input id="account" type="text" class="form-control"></input>
+            </div>
+            <div class="form-group">
+              <label for="task-author">Password</label>
+              <input id="password" type="text" class="form-control"></input>
+            </div>
+            <button id="log-in-button" type="clear" class="btn btn-primary">Submit</button>
+          </form>
+        </div><!--./row-->
+    </div><!--./card-->
+  </div>
+
+
+
+
+    <div class="container">
+      <div class="card">
+        <div class="row">
+          <div class="col-sm-12">
+            <h2 class="organge">Create User</h2>
+          </div>
+        </div>
+        <div class="row">
+          <form id="new-task" class="col-sm-12">
+            <div class="form-group">
+              <label for="task-content">Content</label>
+              <input id="task-content" type="text" class="form-control"></input>
+
+            </div>
+            <div class="form-group">
+              <label for="task-author">Author</label>
+              <input id="task-author" type="text" class="form-control"></input>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div id="donate-form" class="container">
+      <div class="card">
+        <div class="row">
+          <div class="col-sm-12">
+            <h2 class="organge">Donate</h2>
+          </div>
+        </div>
+            <div class="form-group">
+              <label for="task-author">Money</label>
+              <input id="task-author" type="text" class="form-control"></input>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+                <!-- Tasks List -->
+                <div class="card" id="listSection">
+                  <div class="row">
+                  <div class="col-sm-12">
+                      <h2 class="orange">Players</h2>
+                  </div><!--./col-sm-12-->
+                  </div><!--./row-->
+                  <div class="row">
+                  <div class="col-sm-12">
+                      <table class="table">
+                      <thead>
+                          <tr>
+                          <th>Name</th>
+                          <th>level</th>
+                          <th>kill</th>
+                          </tr>
+                      </thead>
+                      <tbody id="players">
+                          <!-- tasks here -->
+                      </tbody>
+                      </table>
+                  </div><!--./col-sm-12-->
+                  </div><!--./row-->
+          </div><!--./card-->
+
+
+
+                <!-- Tasks List -->
+                <div class="card" id="listSection">
+                  <div class="row">
+                  <div class="col-sm-12">
+                      <h2 class="orange">Play Borad</h2>
+                  </div><!--./col-sm-12-->
+                  </div><!--./row-->
+                  <div class="row">
+                  <div class="col-sm-12">
+                      <table class="table">
+                      <thead>
+                          <tr>
+                          <th>Killer</th>
+                          <th>kill</th>
+                          <th>Date</th>
+                          <th>earn</th>
+                          </tr>
+                      </thead>
+                      <tbody id="historys">
+                          <!-- tasks here -->
+                      </tbody>
+                      </table>
+                  </div><!--./col-sm-12-->
+                  </div><!--./row-->
+          </div><!--./card-->
+
+
+  </body>
+</html>
