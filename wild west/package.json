@@ -4,7 +4,9 @@
   "description": "",
   "main": "truffle.js",
   "scripts": {
-    "start": "node server.js",
+    "front":"node-modules/.bin/webpack --watch",
+    "back":"nodemon server.js",
+    "start":"node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

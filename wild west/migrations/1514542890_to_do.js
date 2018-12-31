@@ -1,5 +1,5 @@
-var ToDo = artifacts.require("./ToDo.sol");
+var ToDo = artifacts.require("./WildWest.sol");
 
 module.exports = function(deployer) {
-  deployer.deploy(ToDo);
+  deployer.deploy(WildWest);
 };

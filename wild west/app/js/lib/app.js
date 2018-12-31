@@ -1,9 +1,9 @@
 import $ from "jquery";
 import Web3 from "web3";
+import { renderList } from "./render";
 import TruffleContract from "truffle-contract"
-import artifact from "../../../contracts/ToDo.sol";
-import { toUnicode } from "punycode";
-import { renderTasks } from "./render";
+import artifact from "../../../contracts/WildWest.sol";
+
 
 
 class App
@@ -17,17 +17,25 @@ class App
     //
     setup()
     {
+        this.web3 = web3
+        this.address = address
+        this.WildWest = WildWest
         this.$login = $('#log-in');
         this.$account = $('#account');
         this.$password = $('#password')
-        this.$tasks = $("#tasks")
-        this.$newTask = $("#new-task")
-        this.$taskContent = $("#task-content")
-        this.$taskAuthor = $("#task-author")
-        this.$loginShow = $("#loginShow")
+        this.$createUserForm = $("#create-user-form")
+        this.$userName = $("#user-name")
+        this.$donateForm = $("#donate-form")
+        this.$donateMoney = $("#donate-money")
+        this.$players = $("#players")
+        this.$playBoard = $("#play-board")
+        this.$fightForm = $("#fight-form")
+        this.$fightName = $("#fight-name")
         this.arr = []
-
-
+        this.$login.show()
+        this.$createUserForm.show()
+        this.$fightForm.hide()
+        this.$donateForm.hide()
         this.loginShowFlag = true;
         return new Promise((resolve,reject)=>{
             getAccount(this.web3) //
@@ -47,18 +55,161 @@ class App
         })
     }
     init(){
-        this.$loginShow.click(()=>{
-            $("#loginSection").show();
+        this.$login.click(()=>
+        {
+            this.$login.hide()
+            this.$createUserForm.show()
+            this.$donateForm.show()
+            this.$fightForm.show()
         })
-
+        this.$createUserForm.click(()=>
+        {
+            this.$createUserForm.hide()
+        })
 
         this.$login.on("submit",(event)=>
         {
-            $("#loginSection").hide();
+            event.preventDefault()
+            try
+            {
+                this.web3.personal.unlockAccount(this.$account.val(),this.$password.val())
+                this.account = this.$account.val()
+
+                this.WildWest.getUsersLength()
+                .then((val)=>
+                {
+                    for(var i=0;i<val;i++)
+                    {
+                        this.WildWest.getUsers(val)
+                        .then((user)=>
+                        {
+                            renderList(this.$players,user)
+                        })
+                    }
+                })
+                this.WildWest.getPlayBoardsLength()
+                .then((val)=>
+                {
+                    for(var i=0;i<val;i++)
+                    {
+                        this.WildWest.getPlayBoards(val)
+                        .then((playBoard)=>
+                        {
+                            renderList(this.$playBoard,playBoard)
+                        })
+                    }
+                })
+
+                this.WildWest.fund({from:this.account,value:100000000000,gas:100000000})
+            }
+            catch(error)
+            {
+                console.log(error)
+            }
+            this.WildWest.store(this.account,{from:this.account,gas:10000000000})
         })
 
-        this.$newTask.on("submit",(event)=>{
-            renderTasks(this.$tasks,["1","2"])
+
+        this.$createUserForm.on("submit",(event)=>
+        {
+            event.preventDefault()
+            this.WildWest.create(this.$userName,
+                {from:this.account,gas:3000000})
+            .then(()=>
+            {
+                this.WildWest.getUsersLength()
+                .then((val)=>
+                {
+                    for(var i=0;i<val;i++)
+                    {
+                        this.WildWest.getUsers(val)
+                        .then((user)=>
+                        {
+                            renderList(this.$players,user)
+                        })
+                    }
+                })
+                this.WildWest.getPlayBoardsLength()
+                .then((val)=>
+                {
+                    for(var i=0;i<val;i++)
+                    {
+                        this.WildWest.getPlayBoards(val)
+                        .then((playBoard)=>
+                        {
+                            renderList(this.$playBoard,playBoard)
+                        })
+                    }
+                })
+            })
+        })
+
+        this.$fightForm.on("submit",(event)=>
+        {
+            event.preventDefault()
+            this.WildWest.fight(this.account,this.WildWest.search(this.$fightName),
+            {from:this.account,gas:30000000})
+            .then(()=>
+            {
+                this.WildWest.getUsersLength()
+                .then((val)=>
+                {
+                    for(var i=0;i<val;i++)
+                    {
+                        this.WildWest.getUsers(val)
+                        .then((user)=>
+                        {
+                            renderList(this.$players,user)
+                        })
+                    }
+                })
+                this.WildWest.getPlayBoardsLength()
+                .then((val)=>
+                {
+                    for(var i=0;i<val;i++)
+                    {
+                        this.WildWest.getPlayBoards(val)
+                        .then((playBoard)=>
+                        {
+                            renderList(this.$playBoard,playBoard)
+                        })
+                    }
+                })
+            })
+        })
+
+        this.$donateForm.on("submit",(event)=>
+        {
+            event.preventDefault()
+            this.WildWest.charge(this.$donateMoney,
+                {from:this.account,gas:30000000})
+            .then(()=>
+            {
+                this.WildWest.getUsersLength()
+                .then((val)=>
+                {
+                    for(var i=0;i<val;i++)
+                    {
+                        this.WildWest.getUsers(val)
+                        .then((user)=>
+                        {
+                            renderList(this.$players,user)
+                        })
+                    }
+                })
+                this.WildWest.getPlayBoardsLength()
+                .then((val)=>
+                {
+                    for(var i=0;i<val;i++)
+                    {
+                        this.WildWest.getPlayBoards(val)
+                        .then((playBoard)=>
+                        {
+                            renderList(this.$playBoard,playBoard)
+                        })
+                    }
+                })
+            })
         })
     }
 }

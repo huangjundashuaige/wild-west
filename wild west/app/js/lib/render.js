@@ -1,23 +1,16 @@
 
-const renderTasks = ($tasks, tasks = []) => {
-  if(tasks.length == 0) {
-    $tasks.html('<tr><td scope="row">No task created yet...</td></tr>');
-    return;
-  }
-
-  const html = tasks.map((task) => {
-    return(`<tr>
-      <td>${task[0]}</td>
-      <td>${task[1]}</td>
-      <td>${task[2]}</td>
-      <td>${task[3]}</td>
-      <td><input type="checkbox" id="checkbox-${task[0]}" ${task[4] ? 'checked' : ''}/></td>
-      <td>${task[5] ? formatDate(task[5]) : ''}</td>
-     </tr>`);
+renderList = ($trbody, trs = []) => {
+  html = trs.map((trs) => {
+    temp_s = "<tr>"
+    for(var i =0;i<trs.length;i++)
+    {
+      temp_s+='<td>'+trs[i]+'</td>'
+    }
+    return temp_s;
    });
-  $tasks.html(html.join(''));
+  $trbody.html(temp_s.join(''));
 };
 
 export {
-  renderTasks
+  renderList
 }
